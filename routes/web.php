@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +19,17 @@ Route::get('/', function () {
 });
 Route::get('/productDetail/{product}', [ProductController::class, 'getProductDetail']);
 Route::get('/productpage', [ProductController::class, 'index']);
+
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login'); // Add a method to show the login form
+Route::post('/login', [UserController::class, 'login']);
+
+Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register'); // Add a method to show the registration form
+Route::post('/register', [UserController::class, 'register']);
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/user/{id}', [UserController::class, 'getUserProfile'])->name('user.profile');
+
+Route::get('/homepage', function () {
+    return view('homepage'); // Ensure you have a homepage view
+})->name('homepage');
