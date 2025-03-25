@@ -17,7 +17,6 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/productDetail/{product}', [ProductController::class, 'getProductDetail']);
 Route::get('/productpage', [ProductController::class, 'index']);
 
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login'); // Add a method to show the login form
@@ -33,3 +32,4 @@ Route::get('/user/{id}', [UserController::class, 'getUserProfile'])->name('user.
 Route::get('/homepage', function () {
     return view('homepage'); // Ensure you have a homepage view
 })->name('homepage');
+Route::get('/productDetail/{id}', [ProductController::class, 'getProductDetail']);

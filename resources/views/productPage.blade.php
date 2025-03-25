@@ -119,10 +119,20 @@
                                 Company ID: {{ $product->company_id }}
                             </span>
                             
-                            <small class="text-muted">Product #{{ $product->product_id }}</small>
+                            <p class="product-description">
+                                {{ $product->p_desc }}
+                            </p>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge badge-company">
+                                    Company ID: {{ $product->company_id }}
+                                </span>
+                                
+                                <small class="text-muted">Product #{{ $product->product_id }}</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             @endforeach
         </div>
