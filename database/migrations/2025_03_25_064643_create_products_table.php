@@ -13,7 +13,7 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::drop('')
+        Schema::drop('products');
         Schema::create('products', function (Blueprint $table) {
             $table->id('product_id'); 
             $table->string('model');
