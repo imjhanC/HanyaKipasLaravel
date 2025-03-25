@@ -54,27 +54,29 @@
         <div class="row">
             @foreach ($products as $product)
             <div class="col-md-4">
-                <div class="card product-card shadow-sm">
-                    <img src="data:image/png;base64,{{ $product->p_img }}" 
-                         class="card-img-top product-image" 
-                         alt="{{ $product->model }}">
-                    
-                    <div class="product-details">
-                        <h5 class="product-title">{{ $product->model }}</h5>
+                <a href="{{ url('/productDetail/' . $product->product_id) }}">
+                    <div class="card product-card shadow-sm">
+                        <img src="data:image/png;base64,{{ $product->p_img }}" 
+                            class="card-img-top product-image" 
+                            alt="{{ $product->model }}">
                         
-                        <p class="product-description">
-                            {{ $product->p_desc }}
-                        </p>
-                        
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge badge-company">
-                                Company ID: {{ $product->company_id }}
-                            </span>
+                        <div class="product-details">
+                            <h5 class="product-title">{{ $product->model }}</h5>
                             
-                            <small class="text-muted">Product #{{ $product->product_id }}</small>
+                            <p class="product-description">
+                                {{ $product->p_desc }}
+                            </p>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge badge-company">
+                                    Company ID: {{ $product->company_id }}
+                                </span>
+                                
+                                <small class="text-muted">Product #{{ $product->product_id }}</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             @endforeach
         </div>
