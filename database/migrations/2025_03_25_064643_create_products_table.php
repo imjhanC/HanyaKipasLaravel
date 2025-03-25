@@ -18,9 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('model');
             $table->text('p_desc'); 
             $table->unsignedBigInteger('company_id'); 
-            $table->blob('p_img'); 
+            $table->longText('p_img'); 
 
-            $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
+            $table->foreign('company_id')->references('company_id')->on('company')->onDelete('cascade');
         });
     }
 
