@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Products</title>
+    <title>Our Products - HanyaKipas</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -119,20 +119,10 @@
                                 Company ID: {{ $product->company_id }}
                             </span>
                             
-                            <p class="product-description">
-                                {{ $product->p_desc }}
-                            </p>
-                            
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge badge-company">
-                                    Company ID: {{ $product->company_id }}
-                                </span>
-                                
-                                <small class="text-muted">Product #{{ $product->product_id }}</small>
-                            </div>
+                            <small class="text-muted">Product #{{ $product->product_id }}</small>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
             @endforeach
         </div>
