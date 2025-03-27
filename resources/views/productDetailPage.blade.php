@@ -7,7 +7,7 @@
 </head>
 <body>
     <!-- Back Button -->
-    <button class="back-button" onclick="window.history.back();">
+    <button class="back-button" onclick="window.location.href='{{ url('/productpage') }}'">
         &#8592;
     </button>
     
@@ -27,13 +27,13 @@
             </div>
             
             <div class="purchase-form">
-                <form action="/purchase" method="POST">
+                <form action="{{ route('addToCart') }}" method="POST">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                     
                     <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                        <label for="qty">Quantity</label>
+                        <input type="number" id="qty" name="qty" min="1" value="1" required>
                     </div>
                     
                     <button type="submit">Add to Cart</button>
@@ -41,6 +41,29 @@
             </div>
         </div>
     </div>
+    @if(session('cart_add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('cart_add') }}
+        </div>
+    @endif
+    @if(session('cart_update'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ session('cart_update') }}
+        </div>
+    @endif
+
+    <script>
+        function forgetCartSession(sessionName) {
+            fetch('/forget-cart-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({session_name: sessionName})
+            });
+        }
+    </script>
 </body>
 </html>
 

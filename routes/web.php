@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/productpage', [ProductController::class, 'index']);
+Route::get('/productDetail/{id}', [ProductController::class, 'getProductDetail']);
+
+Route::post('/addToCart', [CartController::class,'addToCart'])->name('addToCart');
 
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login'); // Add a method to show the login form
 Route::post('/login', [UserController::class, 'login']);
@@ -32,4 +37,12 @@ Route::get('/user/{id}', [UserController::class, 'getUserProfile'])->name('user.
 Route::get('/homepage', function () {
     return view('homepage'); // Ensure you have a homepage view
 })->name('homepage');
-Route::get('/productDetail/{id}', [ProductController::class, 'getProductDetail']);
+
+Route::post('/forget-cart-session', function(Request $request) {
+    $data = $request->validate([
+        'session_name' => 'required|string'
+    ]);
+    
+    session()->forget($data['session_name']);
+    return response()->json(['status' => 'success']);
+});

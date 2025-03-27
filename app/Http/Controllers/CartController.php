@@ -8,16 +8,35 @@ use App\Models\Cart;
 class CartController extends Controller
 {
     function addToCart(Request $req){
-        $userId = session('user_id');
+        // $userId = session('user_id');
+        $userId = 1;
         if (!$userId) {
             return redirect('login');
         }
-        else{
+
+        $existingCartItem = Cart::where('user_id', $userId)
+                              ->where('product_id', $req->product_id)
+                              ->first();
+
+        if ($existingCartItem) {
+        // Update quantity if product exists
+            Cart::where('user_id', $userId)
+                ->where('product_id', $req->product_id)
+                ->update([
+                    'qty' => $existingCartItem->qty + $req->qty
+            ]);
+            $message = 'Product quantity updated in cart!';
+            return back()->with('cart_update', $message);
+        } else {
+            // Create new cart item if product doesn't exist
             Cart::create([
                 'product_id' => $req->product_id,
-                'user_id' => $req->user_id,
+                // 'user_id' => $req->user_id,
+                'user_id' => $userId,
                 'qty' => $req->qty,
             ]);
+            $message = 'Product added to cart successfully!';
+            return back()->with('cart_add', $message);
         }
     }
 }
