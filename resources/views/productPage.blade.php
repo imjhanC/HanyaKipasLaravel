@@ -8,61 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f6f9;
-            padding-top: 80px; /* Adjust for fixed navbar */
-        }
-        .product-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 20px;
-        }
-        .product-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .product-image {
-            height: 250px;
-            object-fit: cover;
-            width: 100%;
-        }
-        .product-details {
-            padding: 15px;
-            background-color: white;
-        }
-        .product-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .product-description {
-            color: #666;
-            margin-bottom: 15px;
-        }
-        .badge-company {
-            background-color: #007bff;
-            color: white;
-        }
-        /* Custom Navbar Styles */
-        .navbar-custom {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .navbar-search {
-            max-width: 500px;
-            width: 100%;
-        }
-        .user-icon {
-            font-size: 1.5rem;
-            color: #007bff;
-            cursor: pointer;
-        }
-        .logo {
-            font-weight: bold;
-            color: #007bff;
-            font-size: 1.5rem;
-        }
-    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -102,27 +47,29 @@
         <div class="row">
             @foreach ($products as $product)
             <div class="col-md-4">
-                <div class="card product-card shadow-sm">
-                    <img src="data:image/png;base64,{{ $product->p_img }}"
-                          class="card-img-top product-image"
-                          alt="{{ $product->model }}">
-                         
-                    <div class="product-details">
-                        <h5 class="product-title">{{ $product->model }}</h5>
-                         
-                        <p class="product-description">
-                            {{ $product->p_desc }}
-                        </p>
-                         
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge badge-company">
-                                Company ID: {{ $product->company_id }}
-                            </span>
+                <a href="{{ url('/productDetail/' . $product->product_id) }}">
+                    <div class="card product-card shadow-sm">
+                        <img src="data:image/png;base64,{{ $product->p_img }}"
+                            class="card-img-top product-image"
+                            alt="{{ $product->model }}">
                             
-                            <small class="text-muted">Product #{{ $product->product_id }}</small>
+                        <div class="product-details">
+                            <h5 class="product-title">{{ $product->model }}</h5>
+                            
+                            <p class="product-description">
+                                {{ $product->p_desc }}
+                            </p>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge badge-company">
+                                    Company ID: {{ $product->company_id }}
+                                </span>
+                                
+                                <small class="text-muted">Product #{{ $product->product_id }}</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             @endforeach
         </div>
@@ -132,3 +79,62 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<style>
+    a {
+        text-decoration: none;
+    }
+    body {
+        background-color: #f4f6f9;
+        padding-top: 80px; /* Adjust for fixed navbar */
+    }
+    .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+    }
+    .product-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .product-image {
+        height: 250px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .product-details {
+        padding: 15px;
+        background-color: white;
+    }
+    .product-title {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .product-description {
+        color: #666;
+        margin-bottom: 15px;
+    }
+    .badge-company {
+        background-color: #007bff;
+        color: white;
+    }
+    /* Custom Navbar Styles */
+    .navbar-custom {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .navbar-search {
+        max-width: 500px;
+        width: 100%;
+    }
+    .user-icon {
+        font-size: 1.5rem;
+        color: #007bff;
+        cursor: pointer;
+    }
+    .logo {
+        font-weight: bold;
+        color: #007bff;
+        font-size: 1.5rem;
+    }
+</style>
