@@ -38,3 +38,4 @@ class CompanySeeder extends Seeder
         ]);
     }
 }
+//  php artisan db:seed --class=CompanySeeder

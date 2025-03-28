@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/productpage', [ProductController::class, 'index']);
+Route::get('/productpage', [ProductController::class, 'index'])->name('productpage');
 Route::get('/productDetail/{id}', [ProductController::class, 'getProductDetail']);
 
 Route::post('/addToCart', [CartController::class,'addToCart'])->name('addToCart');

@@ -39,7 +39,7 @@ class UserController extends Controller
     
             session(['user_id' => $user->id]);
     
-            return redirect()->route('homepage');
+            return redirect()->route('productpage');
         }
     
         return back()->withErrors([
