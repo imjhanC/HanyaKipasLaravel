@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         // Fetch all data from the products table
-        $products = DB::table('product')->get();
+        $products = DB::table('products')->get();
 
         // Pass the data to the view
         return view('productpage', compact('products'));

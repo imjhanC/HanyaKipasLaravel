@@ -14,7 +14,7 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('company')->insert([
+        DB::table('companies')->insert([
             [
                 'company_id' => 101,
                 'company_name' => 'Tech Innovators Inc.',

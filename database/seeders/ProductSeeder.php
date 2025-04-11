@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
     {
         $imagePath = public_path('fan_image.png');
         $blobData = base64_encode(file_get_contents($imagePath));
-        DB::table('product')->insert([
+        DB::table('products')->insert([
             [
                 'product_id' => 1,
                 'model' => 'Model X1',
