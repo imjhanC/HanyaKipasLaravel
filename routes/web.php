@@ -16,11 +16,8 @@ use App\Http\Controllers\CartController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/productpage', [ProductController::class, 'index']);
-Route::get('/productpage', [ProductController::class, 'index'])->name('productpage');
+Route::get('/', [ProductController::class, 'index'])->name('productpage');
+Route::get('/category', [ProductController::class, 'filterByCategory']);
 Route::get('/productDetail/{id}', [ProductController::class, 'getProductDetail']);
 
 Route::post('/addToCart', [CartController::class,'addToCart'])->name('addToCart');

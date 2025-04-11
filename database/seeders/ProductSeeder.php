@@ -22,6 +22,8 @@ class ProductSeeder extends Seeder
                 'model' => 'Model X1',
                 'p_desc' => 'A high-performance fan with advanced features.',
                 'company_id' => 101,
+                'p_category' => 'celling',
+                'p_price'=>100.1,
                 'p_img' => $blobData,
             ],
             [
@@ -29,6 +31,8 @@ class ProductSeeder extends Seeder
                 'model' => 'Model X2',
                 'p_desc' => 'A compact and energy-efficient fan.',
                 'company_id' => 102,
+                'p_category' => 'celling',
+                'p_price'=>200.1,
                 'p_img' => $blobData,
             ],
             [
@@ -36,6 +40,8 @@ class ProductSeeder extends Seeder
                 'model' => 'Model Y1',
                 'p_desc' => 'A durable fan designed for industrial use.',
                 'company_id' => 103,
+                'p_category' => 'celling',
+                'p_price'=>300.1,
                 'p_img' => $blobData,
             ],
         ]);

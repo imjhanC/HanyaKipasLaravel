@@ -7,7 +7,7 @@
 </head>
 <body>
     <!-- Back Button -->
-    <button class="back-button" onclick="window.location.href='{{ url('/productpage') }}'">
+    <button class="back-button" onclick="window.location.href='{{ url('/') }}'">
         &#8592;
     </button>
     

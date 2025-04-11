@@ -3,138 +3,408 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Products - HanyaKipas</title>
+    <title>Premium Fans - HanyaKipas</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top navbar-custom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand logo" href="#">HanyaKipas</a>
+            <a class="navbar-brand" href="#">
+                HanyaKipas
+            </a>
             
             <!-- Search Bar -->
-            <form class="d-flex mx-auto navbar-search" role="search">
+            <div class="d-flex mx-auto search-container">
                 <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0">
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input class="form-control border-start-0 ps-0" 
+                    <input class="form-control border-end-0 py-2" 
                            type="search" 
-                           placeholder="Search products..." 
+                           placeholder="Search fans..." 
                            aria-label="Search">
+                    <button class="btn btn-primary px-3" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
-            </form>
+            </div>
             
             <!-- User Icon -->
-            <div class="user-icon">
-                <i class="bi bi-person-circle"></i>
+            <div class="d-flex align-items-center">
+                <a href="#" class="text-dark me-3"><i class="bi bi-heart fs-5"></i></a>
+                <a href="#" class="text-dark me-3 position-relative">
+                    <i class="bi bi-cart3 fs-5"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
+                        0
+                    </span>
+                </a>
+                <a href="#" class="text-dark"><i class="bi bi-person-circle fs-4"></i></a>
             </div>
         </div>
     </nav>
 
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h1 class="display-4">Our Product Catalog</h1>
-                <p class="lead text-muted">Discover our range of high-quality fans</p>
+    <div class="container py-5 mt-4">
+        <!-- Hero Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="p-5 rounded-4 hero-banner">
+                    <h1 class="display-5 fw-bold text-white mb-3">Stay Cool with Premium Fans</h1>
+                    <p class="lead text-white-50 mb-4">Discover our collection of high-performance fans for every space</p>
+                    <button class="btn btn-light btn-lg px-4 shop-now-btn">Shop Now</button>
+                </div>
             </div>
         </div>
-         
-        <div class="row">
+        
+        <!-- Category Filter -->
+        <div class="col-12 category-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0">Shop by Category</h4>
+                <a href="#" class="text-decoration-none text-primary">View all <i class="bi bi-arrow-right"></i></a>
+            </div>
+            
+            <div class="row g-4 category-cards">
+                <div class="col-6 col-md-3">
+                    <div class="category-card active">
+                        <div class="category-icon mb-3">
+                            <i class="bi bi-fan"></i>
+                        </div>
+                        <h6 class="mb-0">All Fans</h6>
+                        <div class="category-overlay"></div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-3">
+                    <a href="{{ url('/') }}?category=ceiling" class="text-decoration-none text-dark">
+                        <div class="category-card">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-house-fill"></i>
+                            </div>
+                            <h6 class="mb-0">Ceiling Fans</h6>
+                            <div class="category-overlay"></div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-6 col-md-3">
+                    <div class="category-card">
+                        <div class="category-icon mb-3">
+                            <i class="bi bi-table"></i>
+                        </div>
+                        <h6 class="mb-0">Table Fans</h6>
+                        <div class="category-overlay"></div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-3">
+                    <div class="category-card">
+                        <div class="category-icon mb-3">
+                            <i class="bi bi-wind"></i>
+                        </div>
+                        <h6 class="mb-0">Bladeless Fans</h6>
+                        <div class="category-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Grid Header -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3 class="fw-bold">Our Fan Collection</h3>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort by: Featured
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                        <li><a class="dropdown-item" href="#">Featured</a></li>
+                        <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+                        <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+                        <li><a class="dropdown-item" href="#">Newest Arrivals</a></li>
+                        <li><a class="dropdown-item" href="#">Best Sellers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Grid -->
+        <div class="row g-4">
             @foreach ($products as $product)
-            <div class="col-md-4">
-                <a href="{{ url('/productDetail/' . $product->product_id) }}">
-                    <div class="card product-card shadow-sm">
+            <div class="col-md-4 col-lg-3">
+                <div class="card border-0 h-100 product-card">
+                    <div class="position-relative">
                         <img src="data:image/png;base64,{{ $product->p_img }}"
                             class="card-img-top product-image"
                             alt="{{ $product->model }}">
-                            
-                        <div class="product-details">
-                            <h5 class="product-title">{{ $product->model }}</h5>
-                            
-                            <p class="product-description">
-                                {{ $product->p_desc }}
-                            </p>
-                            
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge badge-company">
-                                    Company ID: {{ $product->company_id }}
-                                </span>
-                                
-                                <small class="text-muted">Product #{{ $product->product_id }}</small>
-                            </div>
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <button class="btn btn-sm btn-light rounded-circle shadow-sm wishlist-btn">
+                                <i class="bi bi-heart"></i>
+                            </button>
                         </div>
                     </div>
-                </a>
+                    <div class="card-body p-3">
+                        <h6 class="card-title mb-1 fw-semibold">{{ $product->model }}</h6>
+                        <p class="text-muted small mb-2 product-description">{{ Str::limit($product->p_desc, 80) }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="fw-bold text-dark">RM{{ number_format($product->p_price, 2) }}</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary add-to-cart-btn">
+                                <i class="bi bi-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="{{ url('/productDetail/' . $product->product_id) }}" class="stretched-link"></a>
+                </div>
             </div>
             @endforeach
         </div>
+        
+        <!-- Pagination -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
-     
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold mb-3">HanyaKipas</h5>
+                    <p>Providing premium quality fans for your comfort since 2010.</p>
+                    <div class="d-flex gap-3 social-icons">
+                        <a href="#" class="text-white"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-3">Shop</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">All Products</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">New Arrivals</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Bestsellers</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-3">Categories</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Ceiling Fans</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Table Fans</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Stand Fans</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Bladeless</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h6 class="fw-bold mb-3">Newsletter</h6>
+                    <p>Subscribe to get updates on new products and special offers.</p>
+                    <div class="input-group mb-3 newsletter-input">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-white-50">© 2023 HanyaKipas. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small text-white-50 footer-links">
+                        <a href="#" class="text-white-50 me-3">Privacy Policy</a>
+                        <a href="#" class="text-white-50 me-3">Terms of Service</a>
+                        <a href="#" class="text-white-50">Contact Us</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
 
-<style>
-    a {
-        text-decoration: none;
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            padding-top: 80px;
+        }
+        
+        /* Navbar Styles */
+        .navbar-brand {
+            font-weight: 700;
+            color: #2563eb;
+            font-size: 1.8rem;
+        }
+        
+        .search-container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .search-container input {
+            border-radius: 8px 0 0 8px !important;
+        }
+        
+        .search-container button {
+            border-radius: 0 8px 8px 0 !important;
+        }
+        
+        .cart-badge {
+            font-size: 0.6rem;
+        }
+        
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+        
+        .shop-now-btn {
+            border-radius: 8px;
+        }
+        
+        /* Product Cards */
+        .product-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .wishlist-btn {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .product-description {
+            min-height: 40px;
+        }
+        
+        .add-to-cart-btn {
+            border-radius: 8px;
+        }
+        
+        /* Newsletter */
+        .newsletter-input input {
+            border-radius: 8px 0 0 8px !important;
+        }
+        
+        .newsletter-input button {
+            border-radius: 0 8px 8px 0 !important;
+        }
+        
+        /* Footer */
+        .social-icons a {
+            transition: opacity 0.3s;
+        }
+        
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+        
+        .footer-links a {
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white !important;
+        }
+
+        .category-section {
+        margin-bottom: 3rem;
     }
-    body {
-        background-color: #f4f6f9;
-        padding-top: 80px; /* Adjust for fixed navbar */
+    
+    .category-cards {
+        margin-top: 0.5rem;
     }
-    .product-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        margin-bottom: 20px;
+    
+    .category-card {
+        background-color: #f8f9fa;
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    .product-card:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
-    .product-image {
-        height: 250px;
-        object-fit: cover;
-        width: 100%;
-    }
-    .product-details {
-        padding: 15px;
-        background-color: white;
-    }
-    .product-title {
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-    }
-    .product-description {
-        color: #666;
-        margin-bottom: 15px;
-    }
-    .badge-company {
-        background-color: #007bff;
+    
+    .category-card.active {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         color: white;
     }
-    /* Custom Navbar Styles */
-    .navbar-custom {
-        background-color: white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    .category-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+        transition: all 0.3s ease;
     }
-    .navbar-search {
-        max-width: 500px;
-        width: 100%;
+    
+    .category-card:hover .category-icon {
+        transform: scale(1.1);
     }
-    .user-icon {
-        font-size: 1.5rem;
-        color: #007bff;
-        cursor: pointer;
+    
+    .category-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: #2563eb;
+        transition: all 0.3s ease;
+        opacity: 0;
     }
-    .logo {
-        font-weight: bold;
-        color: #007bff;
-        font-size: 1.5rem;
+    
+    .category-card:hover .category-overlay {
+        opacity: 1;
+        height: 5px;
     }
-</style> 
+    
+    .category-card.active .category-overlay {
+        opacity: 0;
+    }
+    </style>
+</body>
+</html>
