@@ -40,7 +40,13 @@ Route::post('/forget-cart-session', function(Request $request) {
     $data = $request->validate([
         'session_name' => 'required|string'
     ]);
-    
+
     session()->forget($data['session_name']);
     return response()->json(['status' => 'success']);
 });
+
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/update-cart', [CartController::class, 'update'])->name('updateCart');
+Route::post('/remove-from-cart', [CartController::class, 'remove'])->name('removeFromCart');
+Route::get('/cart', [CartController::class, 'view'])->name('viewCart');

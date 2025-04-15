@@ -10,5 +10,12 @@ class Cart extends Model
     public $timestamps = false;
     use HasFactory;
     protected $fillable = ['product_id', 'user_id', 'qty'];
-    protected $table = 'cart';
+    protected $table = 'carts';
+
+    // In App\Models\Cart
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
 }
