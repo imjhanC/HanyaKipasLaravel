@@ -37,7 +37,6 @@
 
             <!-- User Icon -->
             <div class="d-flex align-items-center">
-                <a href="#" class="text-dark me-3"><i class="bi bi-heart fs-5"></i></a>
                 <a href="#" class="text-dark me-3 position-relative">
                     <i class="bi bi-cart3 fs-5"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
@@ -384,7 +383,6 @@
         }
 
         .category-section {
-<<<<<<< HEAD
             margin-bottom: 3rem;
         }
         
@@ -467,7 +465,6 @@
         .dropdown-item.text-danger:hover {
             background-color: #fff5f5;
         }
-=======
         margin-bottom: 3rem;
     }
 
@@ -531,7 +528,6 @@
     .category-card.active .category-overlay {
         opacity: 0;
     }
->>>>>>> 0ee759146d0384b34b1341935e228382725b6ce2
     </style>
 </body>
 </html>
