@@ -40,7 +40,9 @@ Route::post('/forget-cart-session', function(Request $request) {
     $data = $request->validate([
         'session_name' => 'required|string'
     ]);
-    
+
     session()->forget($data['session_name']);
     return response()->json(['status' => 'success']);
 });
+
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');

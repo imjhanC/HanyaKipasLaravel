@@ -20,6 +20,16 @@ class ProductController extends Controller
         // Pass the data to the view
         return view('productpage', compact('products'));
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Case-insensitive search on 'model' column
+        $products = Product::whereRaw('LOWER(model) LIKE ?', ['%' . strtolower($query) . '%'])->get();
+
+        return view('productpage', compact('products', 'query'));
+    }
+
     public function filterByCategory(Request $request)
     {
         $category = $request->query('category');
