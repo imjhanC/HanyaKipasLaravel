@@ -32,11 +32,11 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
-    
+        
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            $user = User::where('email', $credentials['email'])->first();
             session([
-                'user_id' => $user->id,
+                'user_id' => $user->user_id,
                 'username' => $user->name
             ]);
             return redirect()->route('productpage');

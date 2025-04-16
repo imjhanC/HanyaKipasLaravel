@@ -46,4 +46,4 @@ Route::post('/forget-cart-session', function(Request $request) {
 });
 
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
-
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart');

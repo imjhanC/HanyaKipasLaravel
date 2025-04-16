@@ -37,10 +37,10 @@
 
             <!-- User Icon -->
             <div class="d-flex align-items-center">
-                <a href="#" class="text-dark me-3 position-relative">
+                <a href="{{ route('cart') }}" class="text-dark me-3 position-relative">
                     <i class="bi bi-cart3 fs-5"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
-                        0
+                        {{ $cartCount ?? 0 }}
                     </span>
                 </a>
                 <!-- Updated User Dropdown Menu -->
