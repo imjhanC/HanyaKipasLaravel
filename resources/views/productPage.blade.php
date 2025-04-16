@@ -90,23 +90,27 @@
                 </div>
                 
                 <div class="col-6 col-md-3">
-                    <div class="category-card">
-                        <div class="category-icon mb-3">
-                            <i class="bi bi-table"></i>
+                    <a href="{{ url('/') }}?category=table" class="text-decoration-none text-dark">
+                        <div class="category-card">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-table"></i>
+                            </div>
+                            <h6 class="mb-0">Table Fans</h6>
+                            <div class="category-overlay"></div>
                         </div>
-                        <h6 class="mb-0">Table Fans</h6>
-                        <div class="category-overlay"></div>
-                    </div>
+                    </a>
                 </div>
                 
                 <div class="col-6 col-md-3">
-                    <div class="category-card">
-                        <div class="category-icon mb-3">
-                            <i class="bi bi-wind"></i>
+                    <a href="{{ url('/') }}?category=bladeless" class="text-decoration-none text-dark">
+                        <div class="category-card">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-wind"></i>
+                            </div>
+                            <h6 class="mb-0">Bladeless Fans</h6>
+                            <div class="category-overlay"></div>
                         </div>
-                        <h6 class="mb-0">Bladeless Fans</h6>
-                        <div class="category-overlay"></div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
