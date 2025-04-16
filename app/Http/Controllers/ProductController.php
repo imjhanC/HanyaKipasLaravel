@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         $category = $request->query('category');
 
-        if ($category == 'all' || !$category) {
+        if ($category == 'all' || $category == null) {
             // Fetch all products if 'all' or no category is selected
             $products = DB::table('products')->get();
         } else {
