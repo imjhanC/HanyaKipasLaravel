@@ -19,20 +19,22 @@
             <a class="navbar-brand" href="#">
                 HanyaKipas
             </a>
-            
+
             <!-- Search Bar -->
-            <div class="d-flex mx-auto search-container">
+            <form method="GET" action="{{ route('products.search') }}" class="d-flex mx-auto search-container">
                 <div class="input-group">
-                    <input class="form-control border-end-0 py-2" 
-                           type="search" 
-                           placeholder="Search fans..." 
+                    <input class="form-control border-end-0 py-2"
+                           type="search"
+                           name="query"
+                           placeholder="Search fans..."
                            aria-label="Search">
                     <button class="btn btn-primary px-3" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
-            </div>
-            
+            </form>
+
+
             <!-- User Icon -->
             <div class="d-flex align-items-center">
                 <a href="#" class="text-dark me-3"><i class="bi bi-heart fs-5"></i></a>
@@ -58,14 +60,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Category Filter -->
         <div class="col-12 category-section">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4 class="fw-bold mb-0">Shop by Category</h4>
                 <a href="#" class="text-decoration-none text-primary">View all <i class="bi bi-arrow-right"></i></a>
             </div>
-            
+
             <div class="row g-4 category-cards">
                 <div class="col-6 col-md-3">
                     <div class="category-card active">
@@ -76,7 +78,7 @@
                         <div class="category-overlay"></div>
                     </div>
                 </div>
-                
+
                 <div class="col-6 col-md-3">
                     <a href="{{ url('/') }}?category=ceiling" class="text-decoration-none text-dark">
                         <div class="category-card">
@@ -88,7 +90,7 @@
                         </div>
                     </a>
                 </div>
-                
+
                 <div class="col-6 col-md-3">
                     <a href="{{ url('/') }}?category=table" class="text-decoration-none text-dark">
                         <div class="category-card">
@@ -100,7 +102,7 @@
                         </div>
                     </a>
                 </div>
-                
+
                 <div class="col-6 col-md-3">
                     <a href="{{ url('/') }}?category=bladeless" class="text-decoration-none text-dark">
                         <div class="category-card">
@@ -114,7 +116,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Product Grid Header -->
         <div class="row mb-4">
             <div class="col-md-6">
@@ -135,7 +137,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Product Grid -->
         <div class="row g-4">
             @foreach ($products as $product)
@@ -168,7 +170,7 @@
             </div>
             @endforeach
         </div>
-        
+
         <!-- Pagination -->
         <div class="row mt-5">
             <div class="col-12">
@@ -188,7 +190,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Footer -->
     <footer class="bg-dark text-white py-5 mt-5">
         <div class="container">
@@ -254,93 +256,93 @@
             background-color: #f8fafc;
             padding-top: 80px;
         }
-        
+
         /* Navbar Styles */
         .navbar-brand {
             font-weight: 700;
             color: #2563eb;
             font-size: 1.8rem;
         }
-        
+
         .search-container {
             max-width: 500px;
             width: 100%;
         }
-        
+
         .search-container input {
             border-radius: 8px 0 0 8px !important;
         }
-        
+
         .search-container button {
             border-radius: 0 8px 8px 0 !important;
         }
-        
+
         .cart-badge {
             font-size: 0.6rem;
         }
-        
+
         /* Hero Banner */
         .hero-banner {
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         }
-        
+
         .shop-now-btn {
             border-radius: 8px;
         }
-        
+
         /* Product Cards */
         .product-card {
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
+
         .product-image {
             height: 220px;
             object-fit: cover;
             width: 100%;
         }
-        
+
         .wishlist-btn {
             width: 32px;
             height: 32px;
         }
-        
+
         .product-description {
             min-height: 40px;
         }
-        
+
         .add-to-cart-btn {
             border-radius: 8px;
         }
-        
+
         /* Newsletter */
         .newsletter-input input {
             border-radius: 8px 0 0 8px !important;
         }
-        
+
         .newsletter-input button {
             border-radius: 0 8px 8px 0 !important;
         }
-        
+
         /* Footer */
         .social-icons a {
             transition: opacity 0.3s;
         }
-        
+
         .social-icons a:hover {
             opacity: 0.8;
         }
-        
+
         .footer-links a {
             transition: color 0.3s;
         }
-        
+
         .footer-links a:hover {
             color: white !important;
         }
@@ -348,11 +350,11 @@
         .category-section {
         margin-bottom: 3rem;
     }
-    
+
     .category-cards {
         margin-top: 0.5rem;
     }
-    
+
     .category-card {
         background-color: #f8f9fa;
         border-radius: 16px;
@@ -369,27 +371,27 @@
         align-items: center;
         box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    
+
     .category-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
-    
+
     .category-card.active {
         background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         color: white;
     }
-    
+
     .category-icon {
         font-size: 2.5rem;
         margin-bottom: 0.75rem;
         transition: all 0.3s ease;
     }
-    
+
     .category-card:hover .category-icon {
         transform: scale(1.1);
     }
-    
+
     .category-overlay {
         position: absolute;
         bottom: 0;
@@ -400,12 +402,12 @@
         transition: all 0.3s ease;
         opacity: 0;
     }
-    
+
     .category-card:hover .category-overlay {
         opacity: 1;
         height: 5px;
     }
-    
+
     .category-card.active .category-overlay {
         opacity: 0;
     }
