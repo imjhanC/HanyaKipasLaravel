@@ -25,7 +25,14 @@ Route::post('/addToCart', [CartController::class,'addToCart'])->name('addToCart'
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login'); // Add a method to show the login form
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/getproductpage',[UserController::class, 'get_user_page'])->name('redirectuser');
-Route::get('/admin',[UserController::class,'get_admin_page'])->name('admin');
+
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+    // All your admin routes go here
+    Route::get('/admin',[UserController::class,'get_admin_page'])->name('admin');
+    // Add other admin routes...
+});
+
+// Route::get('/admin',[UserController::class,'get_admin_page'])->name('admin');
 
 Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register'); // Add a method to show the registration form
 Route::post('/register', [UserController::class, 'register']);
