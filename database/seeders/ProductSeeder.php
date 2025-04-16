@@ -14,8 +14,9 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $imagePath = public_path('fan_image.png');
-        $blobData = base64_encode(file_get_contents($imagePath));
+        // Define the base path for the product images
+        $basePath = public_path('Products');
+
         DB::table('products')->insert([
             // Bladeless Fans
             [
@@ -25,7 +26,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 101,
                 'p_category' => 'bladeless',
                 'p_price' => 150.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/bladelessfan/bladeless1.jpg')),
             ],
             [
                 'product_id' => 2,
@@ -34,7 +35,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 102,
                 'p_category' => 'bladeless',
                 'p_price' => 250.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/bladelessfan/bladeless2.jpg')),
             ],
             [
                 'product_id' => 3,
@@ -43,7 +44,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 103,
                 'p_category' => 'bladeless',
                 'p_price' => 350.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/bladelessfan/bladeless3.jpg')),
             ],
             [
                 'product_id' => 4,
@@ -52,7 +53,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 104,
                 'p_category' => 'bladeless',
                 'p_price' => 450.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/bladelessfan/bladeless4.jpg')),
             ],
             [
                 'product_id' => 5,
@@ -61,7 +62,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 105,
                 'p_category' => 'bladeless',
                 'p_price' => 550.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/bladelessfan/bladeless5.jpg')),
             ],
 
             // Ceiling Fans
@@ -72,7 +73,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 101,
                 'p_category' => 'celling',
                 'p_price' => 200.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/cellingfan/cellingfan1.jpg')),
             ],
             [
                 'product_id' => 7,
@@ -81,7 +82,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 102,
                 'p_category' => 'celling',
                 'p_price' => 300.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/cellingfan/cellingfan2.jpg')),
             ],
             [
                 'product_id' => 8,
@@ -90,7 +91,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 103,
                 'p_category' => 'celling',
                 'p_price' => 400.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/cellingfan/cellingfan3.jpg')),
             ],
             [
                 'product_id' => 9,
@@ -99,7 +100,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 104,
                 'p_category' => 'celling',
                 'p_price' => 500.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/cellingfan/cellingfan4.jpg')),
             ],
             [
                 'product_id' => 10,
@@ -108,7 +109,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 105,
                 'p_category' => 'celling',
                 'p_price' => 600.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/cellingfan/cellingfan5.jpg')),
             ],
 
             // Table Fans
@@ -119,7 +120,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 101,
                 'p_category' => 'table',
                 'p_price' => 250.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/tablefan/tablefan1.jpg')),
             ],
             [
                 'product_id' => 12,
@@ -128,7 +129,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 102,
                 'p_category' => 'table',
                 'p_price' => 350.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/tablefan/tablefan2.jpg')),
             ],
             [
                 'product_id' => 13,
@@ -137,7 +138,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 103,
                 'p_category' => 'table',
                 'p_price' => 450.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/tablefan/tablefan3.jpg')),
             ],
             [
                 'product_id' => 14,
@@ -146,7 +147,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 104,
                 'p_category' => 'table',
                 'p_price' => 550.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/tablefan/tablefan4.jpg')),
             ],
             [
                 'product_id' => 15,
@@ -155,7 +156,7 @@ class ProductSeeder extends Seeder
                 'company_id' => 105,
                 'p_category' => 'table',
                 'p_price' => 650.1,
-                'p_img' => $blobData,
+                'p_img' => base64_encode(file_get_contents($basePath . '/tablefan/tablefan5.jpg')),
             ],
         ]);
     }
