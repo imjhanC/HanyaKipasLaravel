@@ -17,7 +17,7 @@ use App\Http\Controllers\CartController;
 */
 
 Route::get('/', [ProductController::class, 'index'])->name('productpage');
-Route::get('/category', [ProductController::class, 'filterByCategory']);
+Route::get('/category', [ProductController::class, 'filterByCategory'])->name('filterByCategory');
 Route::get('/productDetail/{id}', [ProductController::class, 'getProductDetail']);
 
 Route::post('/addToCart', [CartController::class,'addToCart'])->name('addToCart');

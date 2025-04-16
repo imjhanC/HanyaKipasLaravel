@@ -43,6 +43,6 @@ class ProductController extends Controller
         }
 
         // Pass the filtered data to the view
-        return view('productPage', compact('products'));
+        return view('productPage', compact('products','category'));
 }
 }

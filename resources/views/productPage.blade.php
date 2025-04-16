@@ -103,8 +103,8 @@
 
             <div class="row g-4 category-cards">
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/category') }}?category=all" class="text-decoration-none text-dark">
-                        <div class="category-card active">
+                    <a href="{{ route('filterByCategory', ['category' => 'all']) }}" class="text-decoration-none text-dark">
+                        <div class="category-card {{ request('category') == 'all' || !request('category') ? 'category-all active' : '' }}">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-fan"></i>
                             </div>
@@ -115,8 +115,8 @@
                 </div>
 
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/') }}?category=celling" class="text-decoration-none text-dark">
-                        <div class="category-card">
+                    <a href="{{ route('filterByCategory', ['category' => 'celling']) }}" class="text-decoration-none text-dark">
+                        <div class="category-card {{ request('category') == 'celling' ? 'category-celling active' : '' }}">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-house-fill"></i>
                             </div>
@@ -127,8 +127,8 @@
                 </div>
 
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/') }}?category=table" class="text-decoration-none text-dark">
-                        <div class="category-card">
+                    <a href="{{ route('filterByCategory', ['category' => 'table']) }}" class="text-decoration-none text-dark">
+                        <div class="category-card {{ request('category') == 'table' ? 'category-table active' : '' }}">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-table"></i>
                             </div>
@@ -139,8 +139,8 @@
                 </div>
 
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/') }}?category=bladeless" class="text-decoration-none text-dark">
-                        <div class="category-card">
+                    <a href="{{ route('filterByCategory', ['category' => 'bladeless']) }}" class="text-decoration-none text-dark">
+                        <div class="category-card {{ request('category') == 'bladeless' ? 'category-bladeless active' : '' }}">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-wind"></i>
                             </div>
@@ -383,88 +383,6 @@
         }
 
         .category-section {
-            margin-bottom: 3rem;
-        }
-        
-        .category-cards {
-            margin-top: 0.5rem;
-        }
-        
-        .category-card {
-            background-color: #f8f9fa;
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        
-        .category-card.active {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-        }
-        
-        .category-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
-        }
-        
-        .category-card:hover .category-icon {
-            transform: scale(1.1);
-        }
-        
-        .category-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: #2563eb;
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-        
-        .category-card:hover .category-overlay {
-            opacity: 1;
-            height: 5px;
-        }
-        
-        .category-card.active .category-overlay {
-            opacity: 0;
-        }
-        
-        /* User Dropdown Menu Styles */
-        .dropdown-menu {
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .dropdown-item {
-            border-radius: 8px;
-            transition: background-color 0.2s ease;
-        }
-        
-        .dropdown-item:hover {
-            background-color: #f0f4ff;
-        }
-        
-        .dropdown-item.text-danger:hover {
-            background-color: #fff5f5;
-        }
         margin-bottom: 3rem;
     }
 
