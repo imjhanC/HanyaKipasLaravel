@@ -17,7 +17,7 @@
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
-                HanyaKipas
+                Welcome , {{ Auth::user()->name }} to HanyaKipas
             </a>
 
             <!-- Search Bar -->

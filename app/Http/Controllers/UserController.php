@@ -39,12 +39,26 @@ class UserController extends Controller
                 'user_id' => $user->user_id,
                 'username' => $user->name
             ]);
-            return redirect()->route('productpage');
+            if(Auth::user()->role == 'admin'){
+                return redirect()->route('redirectadmin');
+            } else {
+                return redirect()->route('redirectuser');
+            }
         }
     
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function get_admin_page()
+    {
+        return 'This is admin page';
+    }
+
+    public function get_user_page()
+    {
+        return redirect()->route('productpage');
     }
     
     public function register(Request $request)
