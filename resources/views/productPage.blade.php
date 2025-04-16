@@ -42,7 +42,43 @@
                         0
                     </span>
                 </a>
-                <a href="#" class="text-dark"><i class="bi bi-person-circle fs-4"></i></a>
+                <!-- Updated User Dropdown Menu -->
+                <div class="dropdown">
+                    <a href="#" class="text-dark dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        <i class="bi bi-person-circle fs-4"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; padding: 0.5rem;">
+                        @if(session()->has('username'))
+                            <div class="px-3 py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <span class="fw-bold">{{ substr(session('username'), 0, 1) }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-0 fw-semibold">{{ session('username') }}</h6>
+                                        <span class="text-muted small">Customer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="dropdown-divider my-2">
+                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bag me-2"></i> My Orders</a></li>
+                            <hr class="dropdown-divider my-2">
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item py-2 text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+                                </form>
+                            </li>
+                        @else
+                            <li><a class="dropdown-item py-2" href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right me-2"></i> Login</a></li>
+                            <li><a class="dropdown-item py-2" href="{{ route('register') }}"><i class="bi bi-person-plus me-2"></i> Register</a></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -348,69 +384,88 @@
         }
 
         .category-section {
-        margin-bottom: 3rem;
-    }
-    
-    .category-cards {
-        margin-top: 0.5rem;
-    }
-    
-    .category-card {
-        background-color: #f8f9fa;
-        border-radius: 16px;
-        padding: 1.5rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        height: 150px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-    
-    .category-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    }
-    
-    .category-card.active {
-        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-        color: white;
-    }
-    
-    .category-icon {
-        font-size: 2.5rem;
-        margin-bottom: 0.75rem;
-        transition: all 0.3s ease;
-    }
-    
-    .category-card:hover .category-icon {
-        transform: scale(1.1);
-    }
-    
-    .category-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 5px;
-        background: #2563eb;
-        transition: all 0.3s ease;
-        opacity: 0;
-    }
-    
-    .category-card:hover .category-overlay {
-        opacity: 1;
-        height: 5px;
-    }
-    
-    .category-card.active .category-overlay {
-        opacity: 0;
-    }
+            margin-bottom: 3rem;
+        }
+        
+        .category-cards {
+            margin-top: 0.5rem;
+        }
+        
+        .category-card {
+            background-color: #f8f9fa;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-card.active {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #2563eb;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .category-card:hover .category-overlay {
+            opacity: 1;
+            height: 5px;
+        }
+        
+        .category-card.active .category-overlay {
+            opacity: 0;
+        }
+        
+        /* User Dropdown Menu Styles */
+        .dropdown-menu {
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown-item {
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f0f4ff;
+        }
+        
+        .dropdown-item.text-danger:hover {
+            background-color: #fff5f5;
+        }
     </style>
 </body>
 </html>
