@@ -22,13 +22,17 @@ class ProductController extends Controller
     }
     public function filterByCategory(Request $request)
     {
-        // Get the category from the query parameter
         $category = $request->query('category');
 
-        // Fetch products that match the category
-        $products = DB::table('products')->where('p_category', $category)->get();
+        if ($category == 'all' || !$category) {
+            // Fetch all products if 'all' or no category is selected
+            $products = DB::table('products')->get();
+        } else {
+            // Fetch products that match the selected category
+            $products = DB::table('products')->where('p_category', $category)->get();
+        }
 
         // Pass the filtered data to the view
-        return view('productpage', compact('products'));
-    }
+        return view('productPage', compact('products'));
+}
 }

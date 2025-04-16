@@ -67,18 +67,20 @@
             </div>
             
             <div class="row g-4 category-cards">
-                <div class="col-6 col-md-3">
-                    <div class="category-card active">
-                        <div class="category-icon mb-3">
-                            <i class="bi bi-fan"></i>
+                <a href="{{ url('/category') }}?category=all" class="text-decoration-none text-dark">
+                    <div class="col-6 col-md-3">
+                        <div class="category-card active">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-fan"></i>
+                            </div>
+                            <h6 class="mb-0">All Fans</h6>
+                            <div class="category-overlay"></div>
                         </div>
-                        <h6 class="mb-0">All Fans</h6>
-                        <div class="category-overlay"></div>
                     </div>
-                </div>
+                </a>
                 
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/') }}?category=ceiling" class="text-decoration-none text-dark">
+                    <a href="{{ url('/category') }}?category=ceiling" class="text-decoration-none text-dark">
                         <div class="category-card">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-house-fill"></i>
@@ -90,7 +92,7 @@
                 </div>
                 
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/') }}?category=table" class="text-decoration-none text-dark">
+                    <a href="{{ url('/category') }}?category=table" class="text-decoration-none text-dark">
                         <div class="category-card">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-table"></i>
@@ -102,7 +104,7 @@
                 </div>
                 
                 <div class="col-6 col-md-3">
-                    <a href="{{ url('/') }}?category=bladeless" class="text-decoration-none text-dark">
+                    <a href="{{ url('/category') }}?category=bladeless" class="text-decoration-none text-dark">
                         <div class="category-card">
                             <div class="category-icon mb-3">
                                 <i class="bi bi-wind"></i>
