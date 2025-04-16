@@ -4,43 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $product->model }} - Product Details</title>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Back Button -->
-    <button class="back-button" onclick="window.location.href='{{ url('/') }}'">
-        &#8592;
-    </button>
-    
-    <h1>Product Details</h1>
-    
-    <div class="product-container">
-        <div class="product-image">
-            <img src="data:image/png;base64,{{ $product->p_img }}" alt="{{ $product->model }}">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                HanyaKipas
+            </a>
+
+            <!-- User Icon -->
+            <div class="d-flex align-items-center">
+                <a href="#" class="text-dark me-3 position-relative">
+                    <i class="bi bi-cart3 fs-5"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
+                        0
+                    </span>
+                </a>
+                <!-- Updated User Dropdown Menu -->
+                <div class="dropdown">
+                    <a href="#" class="text-dark dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        <i class="bi bi-person-circle fs-4"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3 mt-2" aria-labelledby="userDropdown" style="min-width: 200px; padding: 0.5rem;">
+                        @if(session()->has('username'))
+                            <div class="px-3 py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <span class="fw-bold">{{ substr(session('username'), 0, 1) }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h6 class="mb-0 fw-semibold">{{ session('username') }}</h6>
+                                        <span class="text-muted small">Customer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="dropdown-divider my-2">
+                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bag me-2"></i> My Orders</a></li>
+                            <hr class="dropdown-divider my-2">
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item py-2 text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+                                </form>
+                            </li>
+                        @else
+                            <li><a class="dropdown-item py-2" href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right me-2"></i> Login</a></li>
+                            <li><a class="dropdown-item py-2" href="{{ route('register') }}"><i class="bi bi-person-plus me-2"></i> Register</a></li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
         </div>
+    </nav>
+
+    <div class="content-container">
+        <!-- Back Button -->
+        <button class="back-button" onclick="window.location.href='{{ url('/') }}'">
+            &#8592;
+        </button>
         
-        <div class="product-details">
-            <h2 class="product-title">{{ $product->model }}</h2>
-            
-            <div class="product-description">
-                <h3>Description</h3>
-                <p>{{ $product->p_desc }}</p>
+        <h1>Product Details</h1>
+        
+        <div class="product-container">
+            <div class="product-image">
+                <img src="data:image/png;base64,{{ $product->p_img }}" alt="{{ $product->model }}">
             </div>
             
-            <div class="purchase-form">
-                <form action="{{ route('addToCart') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                    
-                    <div class="form-group">
-                        <label for="qty">Quantity</label>
-                        <input type="number" id="qty" name="qty" min="1" value="1" required>
-                    </div>
-                    
-                    <button type="submit">Add to Cart</button>
-                </form>
+            <div class="product-details">
+                <h2 class="product-title">{{ $product->model }}</h2>
+                
+                <div class="product-description">
+                    <h3>Description</h3>
+                    <p>{{ $product->p_desc }}</p>
+                </div>
+                
+                <div class="purchase-form">
+                    <form action="{{ route('addToCart') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                        
+                        <div class="form-group">
+                            <label for="qty">Quantity</label>
+                            <input type="number" id="qty" name="qty" min="1" value="1" required>
+                        </div>
+                        
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    
     @if(session('cart_add'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('cart_add') }}
@@ -52,6 +114,7 @@
         </div>
     @endif
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function forgetCartSession(sessionName) {
             fetch('/forget-cart-session', {
@@ -81,16 +144,22 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         color: var(--dark-gray);
+        margin: 0;
+        padding: 0;
+        background-color: var(--light-gray);
+        position: relative;
+    }
+    
+    .content-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 20px;
-        background-color: var(--light-gray);
+        padding: 90px 20px 20px; /* Added top padding to account for fixed navbar */
         position: relative;
     }
     
     .back-button {
         position: absolute;
-        top: 25px;
+        top: 95px; /* Adjusted to be below navbar */
         left: 20px;
         background: none;
         border: none;
@@ -197,6 +266,25 @@
         background-color: #c0392b;
     }
     
+    /* Style for navbar elements */
+    .search-container {
+        width: 50%;
+        max-width: 500px;
+    }
+    
+    .navbar {
+        padding: 0.75rem 0;
+    }
+    
+    .navbar-brand {
+        font-weight: 700;
+    }
+    
+    .cart-badge {
+        font-size: 0.6rem;
+        padding: 0.25rem 0.4rem;
+    }
+    
     @media (max-width: 768px) {
         .product-container {
             flex-direction: column;
@@ -207,8 +295,17 @@
         }
         
         .back-button {
-            top: 15px;
+            top: 85px;
             left: 15px;
+        }
+        
+        .search-container {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+        
+        .content-container {
+            padding-top: 120px; /* Increased for mobile view */
         }
     }
 </style>

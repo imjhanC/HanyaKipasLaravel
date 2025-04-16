@@ -34,11 +34,11 @@ class UserController extends Controller
         ]);
     
         if (Auth::attempt($credentials)) {
-    
             $user = Auth::user();
-    
-            session(['user_id' => $user->id]);
-    
+            session([
+                'user_id' => $user->id,
+                'username' => $user->name
+            ]);
             return redirect()->route('productpage');
         }
     
@@ -66,13 +66,26 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-        return view('login'); // Ensure this view exists in resources/views/auth/login.blade.php
+        // Check if user_id exists in session
+        if (session()->has('user_id')) {
+            // User is already logged in, redirect to product page
+            return redirect()->route('productpage');
+        }
+        
+        return view('login');
     }
 
     public function showRegisterForm()
     {
-        return view('register'); // Ensure this view exists
+        // Check if user_id exists in session
+        if (session()->has('user_id')) {
+            // User is already logged in, redirect to product page
+            return redirect()->route('productpage');
+        }
+        
+        return view('register');
     }
+
     public function updateUser(Request $request, $id)
     {
         $user = User::findOrFail($id);

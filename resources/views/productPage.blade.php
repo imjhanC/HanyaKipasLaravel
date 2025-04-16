@@ -65,8 +65,6 @@
                                 </div>
                             </div>
                             <hr class="dropdown-divider my-2">
-                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i> My Profile</a></li>
-                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
                             <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bag me-2"></i> My Orders</a></li>
                             <hr class="dropdown-divider my-2">
                             <li>
