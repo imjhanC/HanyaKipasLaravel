@@ -40,7 +40,7 @@ class UserController extends Controller
                 'username' => $user->name
             ]);
             if(Auth::user()->role == 'admin'){
-                return redirect()->route('redirectadmin');
+                return redirect()->route('admin');
             } else {
                 return redirect()->route('redirectuser');
             }
@@ -53,7 +53,8 @@ class UserController extends Controller
 
     public function get_admin_page()
     {
-        return 'This is admin page';
+        return view ('admin');
+        //return 'This is admin page';
     }
 
     public function get_user_page()
