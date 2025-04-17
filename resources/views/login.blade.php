@@ -81,10 +81,11 @@
         </div>
         
         @if (session('error'))
-        <div class="alert alert-danger mb-4">
-            <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
-        </div>
+            <div class="alert alert-danger mb-4">
+                <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+            </div>
         @endif
+
         
         <form action="{{ route('login') }}" method="POST">
             @csrf

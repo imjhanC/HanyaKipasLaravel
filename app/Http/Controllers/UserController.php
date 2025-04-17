@@ -41,16 +41,13 @@ class UserController extends Controller
                 'user_id' => $user->user_id,
                 'username' => $user->name
             ]);
-            if(Auth::user()->role == 'admin'){
+            if (Auth::user()->role == 'admin') {
                 return redirect()->route('admin');
             } else {
                 return redirect()->route('redirectuser');
             }
         }
-    
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('error', 'Invalid email or password.');
     }
 
     public function get_admin_page()
