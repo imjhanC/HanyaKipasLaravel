@@ -9,6 +9,7 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cookie;
 class UserController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class UserController extends Controller
         $request->session()->flush(); // Clear session data
         return redirect()->route('login')->with('success', 'Logged out successfully.');
     }
-    
+
 
     public function getUserProfile($id)
     {
@@ -34,7 +35,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
-        
+
         if (Auth::attempt($credentials)) {
             $user = User::where('email', $credentials['email'])->first();
             session([
@@ -60,7 +61,7 @@ class UserController extends Controller
     {
         return redirect()->route('productpage');
     }
-    
+
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -85,7 +86,7 @@ class UserController extends Controller
             // User is already logged in, redirect to product page
             return redirect()->route('productpage');
         }
-        
+
         return view('login');
     }
 
@@ -96,7 +97,7 @@ class UserController extends Controller
             // User is already logged in, redirect to product page
             return redirect()->route('productpage');
         }
-        
+
         return view('register');
     }
 
@@ -131,9 +132,9 @@ class UserController extends Controller
         ]);
 
         $data['password'] = Hash::make($data['password']);
-        
+
         User::create($data);
-        
+
         return redirect()->route('admin.users')->with('success', 'User created successfully');
     }
 
@@ -146,34 +147,34 @@ class UserController extends Controller
     public function adminUserUpdate(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        
+
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$id.',user_id',
             'role' => 'required|in:admin,user',
         ]);
-        
+
         // Only update password if provided
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
-        
+
         $user->update($data);
-        
+
         return redirect()->route('admin.users')->with('success', 'User updated successfully');
     }
 
     public function adminUserDestroy($id)
     {
         $user = User::findOrFail($id);
-        
+
         // Prevent deleting your own account
         if ($user->user_id === Auth::id()) {
             return redirect()->route('admin.users')->with('error', 'You cannot delete your own account.');
         }
-        
+
         $user->delete();
-        
+
         return redirect()->route('admin.users')->with('success', 'User deleted successfully');
     }
 
@@ -208,9 +209,9 @@ class UserController extends Controller
             $imageData = base64_encode(file_get_contents($request->file('p_img')));
             $data['p_img'] = $imageData;
         }
-        
+
         Product::create($data);
-        
+
         return redirect()->route('admin.products')->with('success', 'Product created successfully');
     }
 
@@ -223,7 +224,7 @@ class UserController extends Controller
     public function adminProductUpdate(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        
+
         $data = $request->validate([
             'model' => 'required|string',
             'p_desc' => 'required|string',
@@ -241,9 +242,9 @@ class UserController extends Controller
             // Remove p_img from data to prevent overwriting with null
             unset($data['p_img']);
         }
-        
+
         $product->update($data);
-        
+
         return redirect()->route('admin.products')->with('success', 'Product updated successfully');
     }
 
@@ -251,7 +252,7 @@ class UserController extends Controller
     {
         $product = Product::findOrFail($id);
         $product->delete();
-        
+
         return redirect()->route('admin.products')->with('success', 'Product deleted successfully');
     }
 
@@ -263,7 +264,7 @@ class UserController extends Controller
         $carts = Cart::with(['product', 'user'])
             ->orderBy('product_id', 'desc')
             ->paginate(10);
-        
+
         return view('adminCart', compact('carts'));
     }
 

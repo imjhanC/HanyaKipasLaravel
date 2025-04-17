@@ -21,19 +21,38 @@
             </a>
 
             <!-- Search Bar -->
-            <form method="GET" action="{{ route('products.search') }}" class="d-flex mx-auto search-container">
-                <div class="input-group">
-                    <input class="form-control border-end-0 py-2"
-                           type="search"
-                           name="query"
-                           placeholder="Search fans..."
-                           aria-label="Search">
-                    <button class="btn btn-primary px-3" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </form>
+            <div class="search-wrapper">
+                <form method="GET" action="{{ route('products.search') }}" class="d-flex mx-auto search-container">
+                    <div class="input-group">
+                        <input
+                            class="form-control border-end-0 py-2"
+                            type="search"
+                            name="query"
+                            id="searchInput"
+                            placeholder="Search fans..."
+                            aria-label="Search"
+                            autocomplete="off"
+                            value="{{ request('query') }}"
+                        >
+                        <button class="btn btn-primary px-3" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
 
+                <!-- Search History Dropdown -->
+                @if(isset($searchHistory) && count($searchHistory) > 0)
+                    <div class="search-history-dropdown" id="searchHistoryDropdown">
+                        <div class="list-group">
+                            @foreach($searchHistory as $history)
+                                <a href="{{ route('products.search', ['query' => $history]) }}" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-clock-history me-2"></i>{{ $history }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             <!-- User Icon -->
             <div class="d-flex align-items-center">
@@ -447,5 +466,24 @@
         opacity: 0;
     }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchHistoryDropdown = document.getElementById('searchHistoryDropdown');
+
+            if (searchInput && searchHistoryDropdown) {
+                searchInput.addEventListener('focus', function() {
+                    searchHistoryDropdown.style.display = 'block';
+                });
+
+                // Hide dropdown when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!searchInput.contains(event.target) && !searchHistoryDropdown.contains(event.target)) {
+                        searchHistoryDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
