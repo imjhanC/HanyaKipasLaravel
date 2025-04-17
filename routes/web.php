@@ -28,8 +28,27 @@ Route::get('/getproductpage',[UserController::class, 'get_user_page'])->name('re
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     // All your admin routes go here
-    Route::get('/admin',[UserController::class,'get_admin_page'])->name('admin');
-    // Add other admin routes...
+    Route::get('/',[UserController::class,'get_admin_page'])->name('admin');
+    Route::post('/',[UserController::class,'get_admin_page'])->name('admin');
+    Route::post('/users',[UserController::class,'adminUserIndex'])->name('admin.users');
+    // admin management page
+    Route::get('/users', [UserController::class, 'adminUserIndex'])->name('admin.users');
+    Route::post('/users', [UserController::class, 'adminUserStore'])->name('admin.users.store');
+    Route::get('/users/{id}/edit', [UserController::class, 'adminUserEdit'])->name('admin.users.edit');
+    Route::put('/users/{id}', [UserController::class, 'adminUserUpdate'])->name('admin.users.update');
+    Route::delete('/users/{id}', [UserController::class, 'adminUserDestroy'])->name('admin.users.destroy');
+    // admin product management page 
+    Route::get('/products', [UserController::class, 'adminProductIndex'])->name('admin.products');
+    Route::post('/products/store', [UserController::class, 'adminProductStore'])->name('admin.product.store');
+    Route::get('/products/{id}/edit', [UserController::class, 'adminProductEdit'])->name('admin.product.edit');
+    Route::put('/products/update/{id}', [UserController::class, 'adminProductUpdate'])->name('admin.product.update');
+    Route::delete('/products/delete/{id}', [UserController::class, 'adminProductDestroy'])->name('admin.product.destroy');
+    // admin order management page
+    Route::get('/orders', [UserController::class, 'adminOrdersIndex'])->name('admin.orders');
+    Route::delete('/orders/{product_id}/{user_id}', [UserController::class, 'adminOrderDestroy'])->name('admin.orders.destroy');
+    // admin logout 
+
+    Route::post('/logout', [UserController::class, 'admin_logout'])->name('logout');
 });
 
 // Route::get('/admin',[UserController::class,'get_admin_page'])->name('admin');

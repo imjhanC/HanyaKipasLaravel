@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -107,5 +109,182 @@ class UserController extends Controller
         $user->update($request->all());
 
         return response()->json($user);
+    }
+    /**
+     * Admin User Management Methods
+    */
+    public function adminUserIndex()
+    {
+        $users = User::paginate(10);
+        return view('adminUser', compact('users'));
+    }
+
+    public function adminUserCreate()
+    {
+        return view('admin.users.create');
+    }
+
+    public function adminUserStore(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            'role' => 'required|in:admin,user',
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+        
+        User::create($data);
+        
+        return redirect()->route('admin.users')->with('success', 'User created successfully');
+    }
+
+    public function adminUserEdit($id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json($user);
+    }
+
+    public function adminUserUpdate(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,'.$id.',user_id',
+            'role' => 'required|in:admin,user',
+        ]);
+        
+        // Only update password if provided
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+        
+        $user->update($data);
+        
+        return redirect()->route('admin.users')->with('success', 'User updated successfully');
+    }
+
+    public function adminUserDestroy($id)
+    {
+        $user = User::findOrFail($id);
+        
+        // Prevent deleting your own account
+        if ($user->user_id === Auth::id()) {
+            return redirect()->route('admin.users')->with('error', 'You cannot delete your own account.');
+        }
+        
+        $user->delete();
+        
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully');
+    }
+
+    public function admin_logout(Request $request)
+    {
+        $request->session()->flush(); // Clear session data
+        return redirect()->route('login')->with('success', 'Logged out successfully.');
+    }
+
+    /**
+     * Admin Product Management Methods
+    */
+    public function adminProductIndex()
+    {
+        $products = Product::paginate(5);
+        return view('adminProduct', compact('products'));
+    }
+
+    public function adminProductStore(Request $request)
+    {
+        $data = $request->validate([
+            'model' => 'required|string',
+            'p_desc' => 'required|string',
+            'company_id' => 'required',
+            'p_category' => 'required|string',
+            'p_price' => 'required|numeric',
+            'p_img' => 'nullable|image|max:2048',
+        ]);
+
+        // Handle image upload and conversion to base64
+        if ($request->hasFile('p_img')) {
+            $imageData = base64_encode(file_get_contents($request->file('p_img')));
+            $data['p_img'] = $imageData;
+        }
+        
+        Product::create($data);
+        
+        return redirect()->route('admin.products')->with('success', 'Product created successfully');
+    }
+
+    public function adminProductEdit($id)
+    {
+        $product = Product::findOrFail($id);
+        return response()->json($product);
+    }
+
+    public function adminProductUpdate(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        
+        $data = $request->validate([
+            'model' => 'required|string',
+            'p_desc' => 'required|string',
+            'company_id' => 'required',
+            'p_category' => 'required|string',
+            'p_price' => 'required|numeric',
+            'p_img' => 'nullable|image|max:2048',
+        ]);
+
+        // Handle image upload if a new one is provided
+        if ($request->hasFile('p_img')) {
+            $imageData = base64_encode(file_get_contents($request->file('p_img')));
+            $data['p_img'] = $imageData;
+        } else {
+            // Remove p_img from data to prevent overwriting with null
+            unset($data['p_img']);
+        }
+        
+        $product->update($data);
+        
+        return redirect()->route('admin.products')->with('success', 'Product updated successfully');
+    }
+
+    public function adminProductDestroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        
+        return redirect()->route('admin.products')->with('success', 'Product deleted successfully');
+    }
+
+    /**
+     * Admin Cart Methods
+    */
+    public function adminOrdersIndex()
+    {
+        $carts = Cart::with(['product', 'user'])
+            ->orderBy('product_id', 'desc')
+            ->paginate(10);
+        
+        return view('adminCart', compact('carts'));
+    }
+
+    public function adminOrderDestroy($product_id, $user_id)
+    {
+        try {
+            // Find the cart entry
+            $cart = Cart::where('product_id', $product_id)->where('user_id', $user_id)->delete();
+
+            if (!$cart) {
+                return redirect()->route('admin.orders')->with('error', 'Order not found.');
+            }
+
+            // Delete the cart entry
+
+            return redirect()->route('admin.orders')->with('success', 'Order deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.orders')->with('error', 'Failed to delete the order.');
+        }
     }
 }
