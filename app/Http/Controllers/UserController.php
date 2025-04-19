@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -189,8 +190,9 @@ class UserController extends Controller
     */
     public function adminProductIndex()
     {
-        $products = Product::paginate(5);
-        return view('adminProduct', compact('products'));
+        $products = Product::with('company')->paginate(5);
+        $companies = Company::all(); // Get all companies for the dropdown
+        return view('adminProduct', compact('products', 'companies'));
     }
 
     public function adminProductStore(Request $request)
@@ -217,7 +219,7 @@ class UserController extends Controller
 
     public function adminProductEdit($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('company')->findOrFail($id);
         return response()->json($product);
     }
 

@@ -183,6 +183,7 @@
                                         </td>
                                         <td>{{ $product->model }}</td>
                                         <td>{{ \Illuminate\Support\Str::limit($product->p_desc, 50) }}</td>
+                                        <td>{{ $product->company->company_name ?? 'Unknown' }}</td>
                                         <td>{{ $product->company_id }}</td>
                                         <td>{{ $product->p_category }}</td>
                                         <td>{{ $product->p_price }}</td>
